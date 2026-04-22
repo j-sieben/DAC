@@ -33,12 +33,33 @@ if "%UTIL_OWNER%"=="%CONNECT_STRING%" set "UTIL_OWNER=DAC"
 
 pushd "%~dp0DAC"
 (
+  echo set define on
+  echo set verify off
+  echo set serveroutput on size 1000000
+  echo set echo off
+  echo set feedback off
+  echo set lines 120
+  echo set pages 9999
+  echo set heading off
+  echo set headsep off
+  echo set termout off
+  echo whenever sqlerror exit 90 rollback
+  echo whenever oserror exit 11 rollback
   echo define std_dir=%INSTALL_DIR%\
   echo define root_dir=%INSTALL_SCRIPTS_DIR%\
   echo define COMPONENT=DAC
   echo define KOMPONENTE=DAC
   echo define util_owner=%UTIL_OWNER%
   echo @"%INSTALL_DIR%\defines.sql"
+  echo column install_user new_value install_user
+  echo column has_spool new_value has_spool
+  echo select user install_user from dual;
+  echo select case count^(^*^) when 0 then 'false' else 'true' end has_spool
+  echo   from all_objects
+  echo  where object_type = 'PACKAGE BODY'
+  echo    and object_name = 'SPOOL_PKG';
+  echo alter session set plsql_ccflags = 'HAS_SPOOL:^&HAS_SPOOL.';
+  echo set termout on
   echo @"%INSTALL_SCRIPT%"
   echo exit
 ) | sqlplus -L "%CONNECT_STRING%"
