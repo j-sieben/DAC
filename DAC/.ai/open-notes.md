@@ -45,6 +45,5 @@ remain external prerequisites or need to be brought into the standalone project.
 ## VSCode SQL Runner
 
 The install scripts rely on relative SQL*Plus includes. VSCode may launch SQL
-with a different working directory. Use the `dac_ddl` directory as the runner
-working directory or start `@install.sql` from there.
-
+with a different working directory. Use the repository's `DAC` directory as the
+runner working directory or start `@install.sql` from there.

@@ -5,14 +5,14 @@
 utPLSQL package:
 
 ```text
-dac_ddl/tests/dac_access_demo_test.pks
-dac_ddl/tests/dac_access_demo_test.pkb
+unit_tests/dac_access_demo_test.pks
+unit_tests/dac_access_demo_test.pkb
 ```
 
 Installer:
 
 ```text
-dac_ddl/tests/install_tests.sql
+unit_tests/install_tests.sql
 ```
 
 ## Current Coverage Themes
@@ -53,10 +53,9 @@ In this AI environment there is no local `sqlplus` or `sqlcl`, so compilation
 and utPLSQL execution must be done externally. Static checks used so far:
 
 ```sh
-rg -n "pattern" berechtigungsmatrix/dac_ddl
+rg -n "pattern" DAC unit_tests
 ```
 
 The user has repeatedly run tests in Oracle and reported green results before
 the latest assignment-mode removal. After structural changes, rerun install and
 tests in Oracle.
-

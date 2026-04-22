@@ -18,10 +18,13 @@ The current model is deliberately default-deny:
 
 ## Current Location
 
-Core DDL lives under:
+The repository is split into sibling areas:
 
 ```text
-berechtigungsmatrix/dac_ddl
+DAC/                     installable DAC component and source logic
+install_scripts/install  shared installer launch/orchestration scripts
+install_scripts/scripts  shared SQL helper collections
+unit_tests/              utPLSQL tests
 ```
 
 Important entry points:
@@ -30,7 +33,8 @@ Important entry points:
   and read views.
 - `drop_all.sql` drops DAC objects for easier reinstall. It is intentionally not
   included by `install.sql`.
-- `tests/install_tests.sql` installs the utPLSQL demo test package.
+- `reinstall.sql` drops and reinstalls DAC objects.
+- `../unit_tests/install_tests.sql` installs the utPLSQL demo test package.
 
 ## Core Tables
 
@@ -122,16 +126,15 @@ dac_admin.refresh_effective_accesses;
 
 ## Seed Data
 
-- `data/00_seed_messages.sql`
+- `Scripts/00_seed_messages.sql`
   PIT/message definitions used by validation.
 
-- `data/01_seed_lookup_values.sql`
+- `Scripts/01_seed_lookup_values.sql`
   Match state lookup values.
 
-- `data/02_seed_base_configuration.sql`
+- `Scripts/02_seed_base_configuration.sql`
   Base entity types, dimensions, and dimension nodes.
 
-- `data/03_seed_demo_access_cases.sql`
+- `Scripts/03_seed_demo_access_cases.sql`
   Demo users, demo documents, and positive assignments used by the utPLSQL demo
   tests.
-

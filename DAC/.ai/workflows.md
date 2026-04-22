@@ -2,24 +2,33 @@
 
 ## Install
 
-Run from the `dac_ddl` directory so relative `@@` paths resolve:
+Run from the `DAC` directory so relative `@@` paths resolve:
 
 ```sql
-cd /Volumes/Projekte/KIS_Monitor/version_3_1/berechtigungsmatrix/dac_ddl
+cd /path/to/repository/DAC
 @install.sql
 ```
 
-If running from VSCode, ensure the SQL runner working directory is:
+Shell wrappers are available from the repository root:
 
-```text
-/Volumes/Projekte/KIS_Monitor/version_3_1/berechtigungsmatrix/dac_ddl
+```sh
+cd /path/to/repository
+./install.sh user/password@service
 ```
 
-Symptom of wrong working directory:
+Windows:
 
-```text
-SP2-0310: opening file not possible: "tables/00_dac_match_states.sql"
+```bat
+cd \path\to\repository
+install.cmd user/password@service
 ```
+
+Pass `reinstall.sql` or `drop_all.sql` as second argument to run those component
+entry points.
+
+The component follows the install helper target architecture. All standard
+object folders exist below `DAC/`; folders without DAC objects contain no-op
+`install_*.sql` files that print that nothing is installed for that type.
 
 ## Reinstall / Cleanup
 
@@ -34,12 +43,19 @@ Use:
 It drops packages, views, materialized views, and tables in dependency-safe
 order. Missing objects are skipped.
 
+For a full rebuild:
+
+```sql
+@reinstall.sql
+```
+
 ## Tests
 
 Install tests:
 
 ```sql
-@tests/install_tests.sql
+cd ../unit_tests
+@install_tests.sql
 ```
 
 Then run utPLSQL according to the local database tooling.
@@ -94,4 +110,3 @@ select dea_target_den_id document_id,
           dear_ddi_name,
           dea_subject_den_display_name;
 ```
-

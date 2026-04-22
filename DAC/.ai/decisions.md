@@ -75,6 +75,6 @@ comments.
 ## KISMON Decoupling
 
 The project is being separated from the broader KISMON context. Future AI work
-should use this `.ai` folder and the files under `berechtigungsmatrix/dac_ddl`
-as the local source of truth.
-
+should use this `.ai` folder, the installable sources under `DAC/`, the shared
+helpers under `install_scripts/`, and tests under `unit_tests/` as the local
+source of truth.
