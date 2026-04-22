@@ -1,0 +1,8 @@
+# local history of the workspace:
+.lh/
+
+# macOS metadata:
+.DS_Store
+
+# configuration files for Oracle:
+tnsnames.ora
