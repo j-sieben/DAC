@@ -1,0 +1,15 @@
+CREATE TABLE SPOOL(
+  SPOO_ID NUMBER CONSTRAINT c_spoo_id_nn NOT NULL,
+  SPOO_AMS_KOMPONENTE VARCHAR2(1000 CHAR) CONSTRAINT c_spoo_ams_komponente_nn NOT NULL,
+  SPOO_BENUTZER VARCHAR2(30 BYTE) CONSTRAINT c_spoo_benutzer_nn NOT NULL,
+  SPOO_TEXT VARCHAR2(500 BYTE),
+  SPOO_ZEITSTEMPEL DATE DEFAULT SYSDATE CONSTRAINT c_spoo_zeitstempel_nn NOT NULL,
+  CONSTRAINT P_SPOO_ID PRIMARY KEY (SPOO_ID)
+);
+
+COMMENT ON TABLE SPOOL IS 'Tabelle zum Speichern der Ausgaben der DB-Installationsskripte pro Benutzer, wird vor jedem Installationslauf pro Benutzer geleert!';
+COMMENT ON COLUMN SPOOL.SPOO_ID IS 'Primary key, aus Sequenz spoo_id_seq';
+COMMENT ON COLUMN SPOOL.SPOO_AMS_KOMPONENTE IS 'AMS-Komponente zu der die gespoolten Daten gehoeren';
+COMMENT ON COLUMN SPOOL.SPOO_BENUTZER IS 'DB-User, den den Spool erzeugt';
+COMMENT ON COLUMN SPOOL.SPOO_TEXT IS 'Spoolausgabe';
+COMMENT ON COLUMN SPOOL.SPOO_ZEITSTEMPEL IS 'Zeitpunkt der Speicherung dieser Zeile';
