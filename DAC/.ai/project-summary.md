@@ -29,11 +29,10 @@ unit_tests/              utPLSQL tests
 
 Important entry points:
 
-- `install.sql` installs the DAC model, packages, seed data, materialized views,
-  and read views.
-- `drop_all.sql` drops DAC objects for easier reinstall. It is intentionally not
-  included by `install.sql`.
-- `reinstall.sql` drops and reinstalls DAC objects.
+- `../install.sh` and `../install.cmd` run the generic installer from
+  `../install_scripts/install/install.sql` against this DAC component.
+- `Pre_Install/clean_up_install.sql` drops DAC objects and is called by the
+  generic install/uninstall orchestration.
 - `../unit_tests/install_tests.sql` installs the utPLSQL demo test package.
 
 ## Core Tables

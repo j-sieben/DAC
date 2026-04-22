@@ -11,7 +11,8 @@ must be preserved:
 - `dena_id` previously removed from `dac_entity_node_assignments`.
 - effective access tables were replaced by materialized views.
 
-`drop_all.sql` is available for clean rebuilds but is not a migration.
+`Pre_Install/clean_up_install.sql` is available for clean rebuilds but is not a
+migration.
 
 ## Materialized View Caveats
 
@@ -44,6 +45,6 @@ remain external prerequisites or need to be brought into the standalone project.
 
 ## VSCode SQL Runner
 
-The install scripts rely on relative SQL*Plus includes. VSCode may launch SQL
-with a different working directory. Use the repository's `DAC` directory as the
-runner working directory or start `@install.sql` from there.
+The component install scripts rely on relative SQL*Plus includes. The
+repository-root launchers change into the `DAC` directory before invoking the
+generic installer from `install_scripts/install`.

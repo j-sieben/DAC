@@ -26,5 +26,4 @@ Windows:
 install.cmd user/password@service
 ```
 
-Pass `reinstall.sql` or `drop_all.sql` as second argument to run those component
-entry points instead of `install.sql`.
+Pass `uninstall` as second argument to run the generic uninstall path.

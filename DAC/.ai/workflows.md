@@ -2,14 +2,7 @@
 
 ## Install
 
-Run from the `DAC` directory so relative `@@` paths resolve:
-
-```sql
-cd /path/to/repository/DAC
-@install.sql
-```
-
-Shell wrappers are available from the repository root:
+Run the generic installer through the repository-root shell wrappers:
 
 ```sh
 cd /path/to/repository
@@ -23,8 +16,7 @@ cd \path\to\repository
 install.cmd user/password@service
 ```
 
-Pass `reinstall.sql` or `drop_all.sql` as second argument to run those component
-entry points.
+Pass `uninstall` as second argument to run the generic uninstall path.
 
 The component follows the install helper target architecture. All standard
 object folders exist below `DAC/`; folders without DAC objects contain no-op
@@ -32,21 +24,25 @@ object folders exist below `DAC/`; folders without DAC objects contain no-op
 
 ## Reinstall / Cleanup
 
-Use:
+Use the generic uninstall action:
 
-```sql
-@drop_all.sql
+```sh
+./install.sh user/password@service uninstall
 ```
 
-`drop_all.sql` is deliberately not included by `install.sql`.
+Windows:
 
-It drops packages, views, materialized views, and tables in dependency-safe
-order. Missing objects are skipped.
+```bat
+install.cmd user/password@service uninstall
+```
 
-For a full rebuild:
+The generic install path calls `Pre_Install/clean_up_install.sql` before
+installing component objects. Missing objects are skipped.
 
-```sql
-@reinstall.sql
+For a full rebuild, run the default install action:
+
+```sh
+./install.sh user/password@service
 ```
 
 ## Tests

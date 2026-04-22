@@ -1,5 +1,5 @@
 prompt Dropping DAC database objects
-prompt This script is intentionally not called by install.sql.
+prompt This script is called by the generic install and uninstall orchestration.
 
 declare
   procedure drop_object(

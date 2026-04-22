@@ -1,1 +1,3 @@
-prompt No pre-install scripts to run for DAC.
+prompt Seeding DAC messages before package compilation
+
+@@../Scripts/00_seed_messages.sql
