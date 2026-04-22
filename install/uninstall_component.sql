@@ -4,7 +4,7 @@
 @&spool_dir.h1 'Begin uninstall_component'
 
 @&spool_dir.h2 'Remove existing installation (clean_up_install)'
-@clean_up_install
+@&pre_dir.clean_up_install
 
 @&spool_dir.h2 'Remove application (&app_dir.uninstall_app)'
 @&app_dir.uninstall_app
@@ -13,4 +13,3 @@
 @&help_dir.compile_schema
 
 @&spool_dir.h1 'End uninstall_component'
-

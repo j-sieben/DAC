@@ -26,8 +26,6 @@ select to_char(sysdate,'DD.MM.YYYY HH24:MI:SS') now,
        user as install_user
   from dual;
 
-@&spool_dir.h1 'Check wether SPOOL table is available'
-
 col has_spool new_val has_spool format a15
 
 select case count(*) 
@@ -38,6 +36,8 @@ select case count(*)
    and object_name = 'SPOOL_PKG';
 
 alter session set plsql_ccflags = 'HAS_SPOOL:&HAS_SPOOL.';
+
+@&spool_dir.h1 'Check wether SPOOL table is available'
 
 set termout on
 set serveroutput on

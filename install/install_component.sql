@@ -32,9 +32,6 @@
 @&spool_dir.new_line 'Create type specifactions (&type_dir.install_tps)'
 @&type_dir.install_tps
 
-@&spool_dir.new_line 'Create helper package specifications (&helppack_dir.install_help_pks)'
-@&helppack_dir.install_help_pks
-
 @&spool_dir.new_line 'Create package specifications (&pack_dir.install_pks)'
 @&pack_dir.install_pks
 
@@ -43,9 +40,6 @@
 
 @&spool_dir.new_line 'Create type bodies (&type_dir.install_tpb)'
 @&type_dir.install_tpb
-
-@&spool_dir.new_line 'Create helper package bodies (&helppack_dir.install_help_pkb)'
-@&helppack_dir.install_help_pkb
 
 @&spool_dir.new_line 'Create package bodies (&pack_dir.install_pkb)'
 @&pack_dir.install_pkb
@@ -57,7 +51,7 @@
 @&func_dir.install_functions
 
 @&spool_dir.new_line 'Resetting package state'
-@&std_dir.reset_state
+@&help_dir.reset_state
 
 @&spool_dir.new_line 'Execute scripts (&scripts_dir.install_scripts)'
 @&scripts_dir.install_scripts
@@ -72,5 +66,5 @@
 @&spool_dir.new_line 'run Run Once Scripts (&scripts_dir.install_run_once)'
 @&scripts_dir.install_run_once
 
-@&spool_dir.new_line 'Compile schema (&std_dir.compile_schema)'
+@&spool_dir.new_line 'Compile schema (&help_dir.compile_schema)'
 @&help_dir.compile_schema

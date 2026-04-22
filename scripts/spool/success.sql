@@ -21,6 +21,6 @@ SELECT TO_CHAR(SYSDATE,'DD.MM.YYYY HH24:MI:SS') DATUMUHRZEIT FROM dual;
 PROMPT &MSG.
 
 @&spool_dir.step '&sh1.Schema kompilieren - Aufruf compile_schema'
-@&std_dir.compile_schema
+@&help_dir.compile_schema
 
 exit 0

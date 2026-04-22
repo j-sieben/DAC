@@ -3,7 +3,7 @@ column msg new_value MSG
 set termout off
 SELECT CASE WHEN COUNT(*) = 0
          THEN '&script_path.'
-         ELSE '&std_dir.null'
+         ELSE '&help_dir.null'
        END script,
        CASE WHEN COUNT(*) = 0
          THEN '&s1.Creating sequence &seqname. (&script_path.)'
