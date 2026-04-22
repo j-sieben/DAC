@@ -31,9 +31,12 @@ Important entry points:
 
 - `../install.sh` and `../install.cmd` run the generic installer from
   `../install_scripts/install/install.sql` against this DAC component.
-- `Pre_Install/clean_up_install.sql` drops DAC objects and is called by the
-  generic install/uninstall orchestration.
-- `../unit_tests/install_tests.sql` installs the utPLSQL demo test package.
+- `Pre_Install/clean_up_install.sql` is intentionally non-destructive, even
+  though the generic installer calls it before object installation.
+- `Pre_Install/drop_all.sql` drops DAC objects and is called explicitly by the
+  repository-level uninstall/drop launchers.
+- `../unit_tests/install_tests.sql` installs test seed data and the utPLSQL
+  demo test package through the repository-level `install_tests` action.
 
 ## Core Tables
 
@@ -134,6 +137,6 @@ dac_admin.refresh_effective_accesses;
 - `Scripts/02_seed_base_configuration.sql`
   Base entity types, dimensions, and dimension nodes.
 
-- `Scripts/03_seed_demo_access_cases.sql`
+- `../unit_tests/Scripts/03_seed_demo_access_cases.sql`
   Demo users, demo documents, and positive assignments used by the utPLSQL demo
   tests.

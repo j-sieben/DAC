@@ -11,8 +11,10 @@ must be preserved:
 - `dena_id` previously removed from `dac_entity_node_assignments`.
 - effective access tables were replaced by materialized views.
 
-`Pre_Install/clean_up_install.sql` is available for clean rebuilds but is not a
-migration.
+`Pre_Install/clean_up_install.sql` is intentionally non-destructive because the
+generic installer calls it during normal install. Use the repository-level
+uninstall/drop action, which calls `Pre_Install/drop_all.sql`, for a clean
+rebuild. This is still not a migration.
 
 ## Materialized View Caveats
 

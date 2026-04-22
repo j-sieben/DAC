@@ -1,5 +1,5 @@
 prompt Creating DAC package specifications
 
-@@dac_admin.pks
-@@dac_structure.pks
-@@dac_assignments.pks
+@&pack_dir.dac_admin.pks
+@&pack_dir.dac_structure.pks
+@&pack_dir.dac_assignments.pks

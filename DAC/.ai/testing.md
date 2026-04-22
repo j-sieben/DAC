@@ -5,14 +5,20 @@
 utPLSQL package:
 
 ```text
-unit_tests/dac_access_demo_test.pks
-unit_tests/dac_access_demo_test.pkb
+unit_tests/Packages/dac_access_demo_test.pks
+unit_tests/Packages/dac_access_demo_test.pkb
 ```
 
 Installer:
 
 ```text
 unit_tests/install_tests.sql
+```
+
+The installer also seeds the demo access cases from:
+
+```text
+unit_tests/Scripts/03_seed_demo_access_cases.sql
 ```
 
 ## Current Coverage Themes

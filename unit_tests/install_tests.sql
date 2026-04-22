@@ -1,4 +1,5 @@
 prompt Installing DAC utPLSQL tests
 
-@@dac_access_demo_test.pks
-@@dac_access_demo_test.pkb
+@&unit_test_scripts_dir.install_scripts.sql
+@&unit_test_pack_dir.install_pks.sql
+@&unit_test_pack_dir.install_pkb.sql

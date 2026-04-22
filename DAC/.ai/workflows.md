@@ -16,7 +16,8 @@ cd \path\to\repository
 install.cmd user/password@service
 ```
 
-Pass `uninstall` as second argument to run the generic uninstall path.
+Pass `uninstall` as second argument to remove DAC objects and run the generic
+uninstall path.
 
 The component follows the install helper target architecture. All standard
 object folders exist below `DAC/`; folders without DAC objects contain no-op
@@ -37,21 +38,23 @@ install.cmd user/password@service uninstall
 ```
 
 The generic install path calls `Pre_Install/clean_up_install.sql` before
-installing component objects. Missing objects are skipped.
+installing component objects, but the local DAC implementation is intentionally
+non-destructive.
 
-For a full rebuild, run the default install action:
+For a fresh install after cleanup, run uninstall first and then the default
+install action:
 
 ```sh
+./install.sh user/password@service uninstall
 ./install.sh user/password@service
 ```
 
 ## Tests
 
-Install tests:
+Install test data and test packages through the repository-root wrapper:
 
-```sql
-cd ../unit_tests
-@install_tests.sql
+```sh
+./install.sh user/password@service install_tests
 ```
 
 Then run utPLSQL according to the local database tooling.

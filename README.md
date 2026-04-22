@@ -26,4 +26,11 @@ Windows:
 install.cmd user/password@service
 ```
 
-Pass `uninstall` as second argument to run the generic uninstall path.
+Pass `uninstall` as second argument to remove DAC objects and run the generic
+uninstall path. The normal install action does not drop existing objects first.
+
+Install unit-test data and packages separately:
+
+```sh
+./install.sh user/password@service install_tests
+```
