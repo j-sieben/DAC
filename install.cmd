@@ -65,8 +65,8 @@ pushd "%~dp0DAC"
   echo define KOMPONENTE=DAC
   echo define util_owner=%UTIL_OWNER%
   echo @"%INSTALL_DIR%\defines.sql"
-  echo column install_user new_value install_user
-  echo column has_spool new_value has_spool
+  echo column install_user new_value install_user noprint
+  echo column has_spool new_value has_spool noprint
   echo select user install_user from dual;
   echo select case count^(^*^) when 0 then 'false' else 'true' end has_spool
   echo   from all_objects
@@ -77,7 +77,7 @@ pushd "%~dp0DAC"
   if defined PRE_INSTALL_SCRIPT echo %PRE_INSTALL_SCRIPT%
   echo @"%INSTALL_SCRIPT%"
   echo exit
-) | sqlplus -L "%CONNECT_STRING%"
+) | sqlplus -S -L "%CONNECT_STRING%"
 set "SQLPLUS_EXIT=%ERRORLEVEL%"
 popd
 

@@ -1,4 +1,7 @@
 prompt Seeding DAC configuration
 
-@&scripts_dir.01_seed_lookup_values.sql
-@&scripts_dir.02_seed_base_configuration.sql
+define scriptname=seed_lookup_values.sql
+@&help_dir.run_script
+
+define scriptname=seed_base_configuration.sql
+@&help_dir.run_script

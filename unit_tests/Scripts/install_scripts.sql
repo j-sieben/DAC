@@ -1,3 +1,4 @@
 prompt Seeding DAC test data
 
-@&unit_test_scripts_dir.03_seed_demo_access_cases.sql
+define scriptname=seed_demo_access_cases.sql
+@&help_dir.run_script

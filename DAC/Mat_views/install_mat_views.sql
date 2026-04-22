@@ -1,8 +1,15 @@
 prompt Creating DAC materialized views
 
-@&mat_view_dir.06_dac_effective_accesses.mv
-@&mat_view_dir.07_dac_effective_access_reasons.mv
+define mvname=dac_effective_accesses
+@&help_dir.create_mat_view
+
+define mvname=dac_effective_access_reasons
+@&help_dir.create_mat_view
 
 prompt Creating DAC effective access views
 
-@&view_dir.install_effective_views.sql
+define dac_scripts_dir=&scripts_dir.
+define scripts_dir=&view_dir.
+define scriptname=install_effective_views.sql
+@&help_dir.run_script
+define scripts_dir=&dac_scripts_dir.

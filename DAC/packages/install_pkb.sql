@@ -1,5 +1,10 @@
 prompt Creating DAC package bodies
 
-@&pack_dir.dac_admin.pkb
-@&pack_dir.dac_structure.pkb
-@&pack_dir.dac_assignments.pkb
+define packname=dac_admin
+@&help_dir.create_pkb
+
+define packname=dac_structure
+@&help_dir.create_pkb
+
+define packname=dac_assignments
+@&help_dir.create_pkb

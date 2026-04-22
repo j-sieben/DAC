@@ -1,3 +1,4 @@
 prompt Seeding DAC messages before package compilation
 
-@&scripts_dir.00_seed_messages.sql
+define scriptname=seed_messages.sql
+@&help_dir.run_script

@@ -1,5 +1,10 @@
 prompt Creating DAC package specifications
 
-@&pack_dir.dac_admin.pks
-@&pack_dir.dac_structure.pks
-@&pack_dir.dac_assignments.pks
+define packname=dac_admin
+@&help_dir.create_pks
+
+define packname=dac_structure
+@&help_dir.create_pks
+
+define packname=dac_assignments
+@&help_dir.create_pks

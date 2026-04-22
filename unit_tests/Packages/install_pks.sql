@@ -1,3 +1,4 @@
 prompt Creating DAC test package specifications
 
-@&unit_test_pack_dir.dac_access_demo_test.pks
+define packname=dac_access_demo_test
+@&help_dir.create_pks

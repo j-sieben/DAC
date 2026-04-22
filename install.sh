@@ -40,7 +40,7 @@ if [ "$UTIL_OWNER" = "$CONNECT_STRING" ] || [ -z "$UTIL_OWNER" ]; then
 fi
 
 cd "$COMPONENT_DIR"
-sqlplus -L "$CONNECT_STRING" <<SQL
+sqlplus -S -L "$CONNECT_STRING" <<SQL
 set define on
 set verify off
 set serveroutput on size 1000000
@@ -62,8 +62,8 @@ define COMPONENT=DAC
 define KOMPONENTE=DAC
 define util_owner=$UTIL_OWNER
 @"$INSTALL_DIR/defines.sql"
-column install_user new_value install_user
-column has_spool new_value has_spool
+column install_user new_value install_user noprint
+column has_spool new_value has_spool noprint
 select user install_user from dual;
 select case count(*) when 0 then 'false' else 'true' end has_spool
   from all_objects
