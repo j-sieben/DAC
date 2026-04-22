@@ -2,7 +2,7 @@
 column script new_value SCRIPT
 set termout off
 SELECT CASE WHEN COUNT(*) = 0
-         THEN '&std_dir.null'
+         THEN '&help_dir.null'
          ELSE '&3. &1. &2.'
        END script
   FROM user_tab_columns

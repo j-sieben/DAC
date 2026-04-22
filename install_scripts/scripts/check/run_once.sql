@@ -7,7 +7,7 @@ column msg new_value msg
 set termout off
 select case when count(*) = 0
          then '&script_path.'
-         else '&std_dir.null'
+         else '&help_dir.null'
        end script,
        case when count(*) = 0
          then '&s1.Script &script_path. was already executed'

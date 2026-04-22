@@ -26,6 +26,7 @@ DIRNAME=`basename ${PWD}`
 export ROOT_DIR="${PWD}/"
 export STD_DIR="${PWD}/../install_scripts/install/"
 export KOMPONENTE="B3M"
+export COMPONENT="${KOMPONENTE}"
 export NLS_LANG=GERMAN_GERMANY.AL32UTF8
 
 ##############################################################
@@ -53,6 +54,8 @@ sqlplus /nolog << FF
  connect ${INSTALL_USER}/"${INSTALL_USER_PW}"@${SERVICE_NAME} 
  set sqlprompt ""
  define apex_auth=${APEX_AUTH}
+ define komponente=${KOMPONENTE}
+ define component=${COMPONENT}
  define std_dir=${STD_DIR}
  define help_dir=${ROOT_DIR}scripts/helper/
  define root_dir=${ROOT_DIR} 

@@ -6,7 +6,7 @@ column script new_value SCRIPT
 column msg new_value MSG
 set termout off
 SELECT CASE WHEN COUNT(*) = 0
-         THEN '&std_dir.null'
+         THEN '&help_dir.null'
          ELSE '&scriptname.'
        END script
   FROM user_objects

@@ -5,7 +5,7 @@
 column script new_value SCRIPT  
 set termout off
 SELECT CASE WHEN COUNT(*) = 0
-         THEN '&std_dir.null'
+         THEN '&help_dir.null'
          ELSE '&table_dir.&3.'
        END script
   FROM user_constraints

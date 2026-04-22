@@ -1,7 +1,7 @@
 @&spool_dir.h3 'Compile invalid objects'
 
 @&spool_dir.step 'Resetting package state'
-@&std_dir.reset_state
+@&help_dir.reset_state
 
 set serveroutput on
 
@@ -70,7 +70,10 @@ begin
   
   l_msg := '&h3.List of invalid objects';
   dbms_output.put_line(l_msg);
-  &UTIL_OWNER..spool_pkg.insertSpool('&KOMPONENTE.', '&INSTALL_USER.', l_msg);
+
+  $IF $$HAS_SPOOL $THEN
+    &UTIL_OWNER..spool_pkg.insertSpool('&KOMPONENTE.', '&INSTALL_USER.', l_msg);
+  $END
   
   for o in invalid_cur loop
     l_has_invalid_objects := true;
