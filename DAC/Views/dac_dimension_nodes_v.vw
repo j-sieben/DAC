@@ -21,7 +21,7 @@ select dn.ddn_id,
        dn.ddn_updated_at
   from dac_dimension_nodes dn
   join pit_translatable_item_v pti_node
-    on dn.ddn_id = pti_node.pti_id
+    on dn.ddn_pti_id = pti_node.pti_id
    and dn.ddn_pgr_id = pti_node.pti_pmg_name
   join dac_dimensions_v
     on dn.ddn_ddi_id = ddi_id
@@ -29,7 +29,7 @@ select dn.ddn_id,
     on dn.ddn_ddi_id = pn.ddn_ddi_id
    and dn.ddn_ddn_id = pn.ddn_id
   left join pit_translatable_item_v pti_parent
-    on pn.ddn_id = pti_parent.pti_id
+    on pn.ddn_pti_id = pti_parent.pti_id
    and pn.ddn_pgr_id = pti_parent.pti_pmg_name;
 
 comment on table dac_dimension_nodes_v is 'Read access view for hierarchical dimension nodes.';

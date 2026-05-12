@@ -33,6 +33,9 @@ as
   --%test(The inactive archive document never appears as a target)
   procedure inactive_archive_is_not_evaluated_as_target;
 
+  --%test(Entities of the same type are never evaluated against each other)
+  procedure same_type_entities_are_not_compared;
+
   --%test(Dave cannot read Project A because his assignment expired)
   procedure dave_expired_assignment_is_ignored;
 

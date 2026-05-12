@@ -123,12 +123,14 @@ as
 
     Parameters:
       p_det_id - Technical entity type ID to delete.
+      p_force - If true, deletes all entities of this type before deleting the entity type itself.
 
     Errors:
-      Raises foreign key errors if the entity type is still referenced, and PIT errors from <PIT_ADMIN.delete_translatable_item>.
+      Raises foreign key errors if the entity type is still referenced and p_force is false, and PIT errors from <PIT_ADMIN.delete_translatable_item>.
    */
   procedure delete_entity_type(
-    p_det_id in dac_entity_types_v.det_id%type);
+    p_det_id in dac_entity_types_v.det_id%type,
+    p_force in boolean default false);
 
   /**
     Procedure: validate_entity

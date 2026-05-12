@@ -9,7 +9,7 @@ select det_id,
        det_updated_at
   from dac_entity_types
   join pit_translatable_item_v
-    on det_id = pti_id
+    on det_pti_id = pti_id
    and det_pgr_id = pti_pmg_name;
 
 comment on table dac_entity_types_v is 'Read access view for entity types participating in dimensional access control.';
@@ -21,4 +21,3 @@ comment on column dac_entity_types_v.det_active is 'Flag indicating whether the 
 comment on column dac_entity_types_v.det_display_sequence is 'Display order of the entity type.';
 comment on column dac_entity_types_v.det_created_at is 'Creation timestamp.';
 comment on column dac_entity_types_v.det_updated_at is 'Last update timestamp.';
-

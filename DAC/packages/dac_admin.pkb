@@ -5,6 +5,41 @@ as
       Administrative API for dimensional access control master data and assignments.
    */
 
+  function get_match_state_pti_id(
+    p_dms_id in dac_match_states_v.dms_id%type)
+    return varchar2
+  as
+  begin
+    return 'DMS_' || p_dms_id;
+  end get_match_state_pti_id;
+
+
+  function get_entity_type_pti_id(
+    p_det_id in dac_entity_types_v.det_id%type)
+    return varchar2
+  as
+  begin
+    return 'DET_' || p_det_id;
+  end get_entity_type_pti_id;
+
+
+  function get_dimension_pti_id(
+    p_ddi_id in dac_dimensions_v.ddi_id%type)
+    return varchar2
+  as
+  begin
+    return 'DDI_' || p_ddi_id;
+  end get_dimension_pti_id;
+
+
+  function get_dimension_node_pti_id(
+    p_ddn_id in dac_dimension_nodes_v.ddn_id%type)
+    return varchar2
+  as
+  begin
+    return 'DDN_' || p_ddn_id;
+  end get_dimension_node_pti_id;
+
   /**
     Procedure: validate_match_state
       See: <DAC_ADMIN.validate_match_state>
@@ -34,7 +69,7 @@ as
       p_params => msg_params(msg_param('p_dms_id', p_dms_id)));
 
     pit_admin.merge_translatable_item(
-      p_pti_id => p_dms_id,
+      p_pti_id => get_match_state_pti_id(p_dms_id),
       p_pti_pml_name => pit_util.C_DEFAULT_LANGUAGE,
       p_pti_pmg_name => C_PMG_NAME,
       p_pti_name => p_dms_name,
@@ -91,7 +126,7 @@ as
      where dms_id = p_dms_id;
 
     pit_admin.delete_translatable_item(
-      p_pti_id => p_dms_id,
+      p_pti_id => get_match_state_pti_id(p_dms_id),
       p_pti_pmg_name => C_PMG_NAME);
 
     pit.leave_mandatory;
@@ -128,7 +163,7 @@ as
       p_params => msg_params(msg_param('p_det_id', p_det_id)));
 
     pit_admin.merge_translatable_item(
-      p_pti_id => p_det_id,
+      p_pti_id => get_entity_type_pti_id(p_det_id),
       p_pti_pml_name => pit_util.C_DEFAULT_LANGUAGE,
       p_pti_pmg_name => C_PMG_NAME,
       p_pti_name => p_det_name,
@@ -179,17 +214,29 @@ as
       See: <DAC_ADMIN.delete_entity_type>
    */
   procedure delete_entity_type(
-    p_det_id in dac_entity_types_v.det_id%type)
+    p_det_id in dac_entity_types_v.det_id%type,
+    p_force in boolean default false)
   as
   begin
     pit.enter_mandatory('delete_entity_type',
       p_params => msg_params(msg_param('p_det_id', p_det_id)));
 
+    if p_force then
+      for rec in (
+        select den_id
+          from dac_entities
+         where den_det_id = p_det_id
+      )
+      loop
+        delete_entity(rec.den_id);
+      end loop;
+    end if;
+
     delete from dac_entity_types
      where det_id = p_det_id;
 
     pit_admin.delete_translatable_item(
-      p_pti_id => p_det_id,
+      p_pti_id => get_entity_type_pti_id(p_det_id),
       p_pti_pmg_name => C_PMG_NAME);
 
     pit.leave_mandatory;
@@ -345,7 +392,7 @@ as
       p_params => msg_params(msg_param('p_ddi_id', p_ddi_id)));
 
     pit_admin.merge_translatable_item(
-      p_pti_id => p_ddi_id,
+      p_pti_id => get_dimension_pti_id(p_ddi_id),
       p_pti_pml_name => pit_util.C_DEFAULT_LANGUAGE,
       p_pti_pmg_name => C_PMG_NAME,
       p_pti_name => p_ddi_name,
@@ -411,7 +458,7 @@ as
      where ddi_id = p_ddi_id;
 
     pit_admin.delete_translatable_item(
-      p_pti_id => p_ddi_id,
+      p_pti_id => get_dimension_pti_id(p_ddi_id),
       p_pti_pmg_name => C_PMG_NAME);
 
     pit.leave_mandatory;
@@ -449,7 +496,7 @@ as
       p_params => msg_params(msg_param('p_ddn_id', p_ddn_id)));
 
     pit_admin.merge_translatable_item(
-      p_pti_id => p_ddn_id,
+      p_pti_id => get_dimension_node_pti_id(p_ddn_id),
       p_pti_pml_name => pit_util.C_DEFAULT_LANGUAGE,
       p_pti_pmg_name => C_PMG_NAME,
       p_pti_name => p_ddn_name,
@@ -515,7 +562,7 @@ as
      where ddn_id = p_ddn_id;
 
     pit_admin.delete_translatable_item(
-      p_pti_id => p_ddn_id,
+      p_pti_id => get_dimension_node_pti_id(p_ddn_id),
       p_pti_pmg_name => C_PMG_NAME);
 
     pit.leave_mandatory;

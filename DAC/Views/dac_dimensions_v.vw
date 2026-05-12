@@ -10,7 +10,7 @@ select ddi_id,
        ddi_updated_at
   from dac_dimensions
   join pit_translatable_item_v
-    on ddi_id = pti_id
+    on ddi_pti_id = pti_id
    and ddi_pgr_id = pti_pmg_name;
 
 comment on table dac_dimensions_v is 'Read access view for dimensional topologies.';
@@ -23,4 +23,3 @@ comment on column dac_dimensions_v.ddi_active is 'Flag indicating whether the di
 comment on column dac_dimensions_v.ddi_display_sequence is 'Display order of the dimension.';
 comment on column dac_dimensions_v.ddi_created_at is 'Creation timestamp.';
 comment on column dac_dimensions_v.ddi_updated_at is 'Last update timestamp.';
-

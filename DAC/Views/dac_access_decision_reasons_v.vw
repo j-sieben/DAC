@@ -37,6 +37,7 @@ with
       from subject_entities s
       join target_entities t
         on s.den_id <> t.den_id
+       and s.den_det_id <> t.den_det_id
   ),
   active_dimensions as (
     select ddi_id,

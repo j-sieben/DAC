@@ -269,6 +269,32 @@ as
 
 
   /**
+    Procedure: same_type_entities_are_not_compared
+      See: <DAC_ACCESS_DEMO_TEST.same_type_entities_are_not_compared>
+   */
+  procedure same_type_entities_are_not_compared
+  as
+    l_row_count pls_integer;
+  begin
+    select count(*)
+      into l_row_count
+      from dac_access_decisions_v
+     where dad_subject_den_id = 'USER_IVAN'
+       and dad_target_den_id = 'USER_DAVE';
+
+    ut.expect(l_row_count).to_equal(0);
+
+    select count(*)
+      into l_row_count
+      from dac_access_decision_reasons_v
+     where dadr_subject_den_id = 'USER_IVAN'
+       and dadr_target_den_id = 'USER_DAVE';
+
+    ut.expect(l_row_count).to_equal(0);
+  end same_type_entities_are_not_compared;
+
+
+  /**
     Procedure: dave_expired_assignment_is_ignored
       See: <DAC_ACCESS_DEMO_TEST.dave_expired_assignment_is_ignored>
    */

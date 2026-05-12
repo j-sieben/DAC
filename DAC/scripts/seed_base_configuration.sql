@@ -8,27 +8,6 @@ begin
     p_det_is_subject => pit_util.C_TRUE,
     p_det_display_sequence => 10);
 
-  dac_admin.merge_entity_type(
-    p_det_id => 'TOPOLOGY',
-    p_det_name => 'Topologie',
-    p_det_description => q'[Organisationseinheit wie Abteilung, Team oder vergleichbare organisatorische Verortung.]',
-    p_det_is_subject => pit_util.C_FALSE,
-    p_det_display_sequence => 20);
-
-  dac_admin.merge_entity_type(
-    p_det_id => 'JOB',
-    p_det_name => 'Berufsgruppe',
-    p_det_description => q'[Berufs- oder Funktionsgruppe wie Geschäftsführer, Abteilungsleiter oder Teamleiter.]',
-    p_det_is_subject => pit_util.C_FALSE,
-    p_det_display_sequence => 30);
-
-  dac_admin.merge_entity_type(
-    p_det_id => 'DISTRIBUTION_LIST',
-    p_det_name => 'Distribution List',
-    p_det_description => q'[Verteiler für Dokumente und andere zielgerichtet verteilte Inhalte.]',
-    p_det_is_subject => pit_util.C_FALSE,
-    p_det_display_sequence => 40);
-
   dac_admin.merge_dimension(
     p_ddi_id => 'TOPOLOGY',
     p_ddi_name => 'Topologie',
@@ -116,6 +95,14 @@ begin
     p_ddn_name => 'Restrukturierung',
     p_ddn_description => q'[Verteiler für Dokumente und Informationen zur Restrukturierung.]',
     p_ddn_display_sequence => 30);
+
+  dac_admin.delete_entity_type(
+    p_det_id => 'JOB',
+    p_force => true);
+
+  dac_admin.delete_entity_type(
+    p_det_id => 'DISTRIBUTION_LIST',
+    p_force => true);
 
   commit;
 end;
