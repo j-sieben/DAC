@@ -19,9 +19,9 @@ install.cmd user/password@service
 Pass `uninstall` as second argument to remove DAC objects and run the generic
 uninstall path.
 
-The component follows the install helper target architecture. All standard
-object folders exist below `DAC/`; folders without DAC objects contain no-op
-`install_*.sql` files that print that nothing is installed for that type.
+The component follows the install helper target architecture. Object folders
+without DAC objects are omitted; the generic installer treats missing category
+scripts as optional.
 
 ## Reinstall / Cleanup
 
@@ -37,9 +37,8 @@ Windows:
 install.cmd user/password@service uninstall
 ```
 
-The generic install path calls `Pre_Install/clean_up_install.sql` before
-installing component objects, but the local DAC implementation is intentionally
-non-destructive.
+The generic install path checks `Pre_Install/clean_up_install.sql` before
+installing component objects, but DAC intentionally omits that optional script.
 
 For a fresh install after cleanup, run uninstall first and then the default
 install action:

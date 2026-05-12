@@ -59,8 +59,6 @@ pushd "%~dp0DAC"
   echo define std_dir=%INSTALL_DIR%\
   echo define root_dir=%INSTALL_SCRIPTS_DIR%\
   echo define unit_test_dir=%UNIT_TEST_DIR%\
-  echo define unit_test_pack_dir=%UNIT_TEST_DIR%\Packages\
-  echo define unit_test_scripts_dir=%UNIT_TEST_DIR%\Scripts\
   echo define COMPONENT=DAC
   echo define KOMPONENTE=DAC
   echo define util_owner=%UTIL_OWNER%

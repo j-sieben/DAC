@@ -56,8 +56,6 @@ whenever oserror exit 11 rollback
 define std_dir=$INSTALL_DIR/
 define root_dir=$INSTALL_SCRIPTS_DIR/
 define unit_test_dir=$UNIT_TEST_DIR/
-define unit_test_pack_dir=$UNIT_TEST_DIR/Packages/
-define unit_test_scripts_dir=$UNIT_TEST_DIR/Scripts/
 define COMPONENT=DAC
 define KOMPONENTE=DAC
 define util_owner=$UTIL_OWNER

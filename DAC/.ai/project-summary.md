@@ -31,8 +31,8 @@ Important entry points:
 
 - `../install.sh` and `../install.cmd` run the generic installer from
   `../install_scripts/install/install.sql` against this DAC component.
-- `Pre_Install/clean_up_install.sql` is intentionally non-destructive, even
-  though the generic installer calls it before object installation.
+- `Pre_Install/clean_up_install.sql` is intentionally absent; the generic
+  installer treats missing category scripts as optional.
 - `Pre_Install/drop_all.sql` drops DAC objects and is called explicitly by the
   repository-level uninstall/drop launchers.
 - `../unit_tests/install_tests.sql` installs test seed data and the utPLSQL
