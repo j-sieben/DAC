@@ -66,6 +66,24 @@ as
     p_ddi_id in dac_dimension_nodes_v.ddn_ddi_id%type);
 
   /**
+    Procedure: replace_dimension_assignments
+      Replaces all assignments of one entity in one dimension with the provided leaf nodes.
+
+    Parameters:
+      p_den_id - Entity ID whose assignments are replaced.
+      p_ddi_id - Dimension ID whose assignments are replaced.
+      p_ddn_id_list - Colon-separated list of selected leaf node IDs. Null or empty removes all assignments in the dimension.
+
+    Errors:
+      Raises a PIT error if a node does not belong to the requested dimension or is not a leaf node.
+      Also raises errors from <DAC_ADMIN.delete_entity_node_assignment> and <DAC_ADMIN.merge_entity_node_assignment>.
+   */
+  procedure replace_dimension_assignments(
+    p_den_id in dac_entity_node_assignments_v.dena_den_id%type,
+    p_ddi_id in dac_dimension_nodes_v.ddn_ddi_id%type,
+    p_ddn_id_list in varchar2);
+
+  /**
     Procedure: copy_entity_assignments
       Copies all active assignments from one entity to another entity.
 

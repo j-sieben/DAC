@@ -502,7 +502,7 @@ as
   begin
     dac_admin.merge_entity_node_assignment(
       p_dena_den_id => 'USER_BOB',
-      p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
+      p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL',
       p_dena_valid_from => date '1900-01-01',
       p_dena_valid_to => null);
 
@@ -510,7 +510,7 @@ as
       into l_dena_valid_to
       from dac_entity_node_assignments
      where dena_den_id = 'USER_BOB'
-       and dena_ddn_id = 'DISTRIBUTION_LIST_PROJECT_A';
+       and dena_ddn_id = 'DISTRIBUTION_LIST_PROJECT_A_GENERAL';
 
     ut.expect(l_dena_valid_to).to_equal(date '9999-12-31');
   end admin_defaults_assignment_end;

@@ -12,7 +12,7 @@ as
   --%test(Alice can read the Project A plan because she belongs to the Project A distribution list)
   procedure alice_reads_project_a_plan;
 
-  --%test(Alice can read the confidential Project A document because the hierarchy includes child distribution lists)
+  --%test(Alice can read the confidential Project A document because she is assigned to the matching confidential leaf)
   procedure alice_reads_confidential_project_a_document;
 
   --%test(Alice cannot read the Controlling report because no restrictive distribution list matches)
@@ -51,7 +51,7 @@ as
   --%test(Heidi can read Project A because one of her distribution list assignments matches)
   procedure heidi_needs_only_one_matching_assignment;
 
-  --%test(Ivan can read the confidential Project A document because Project A includes child distribution lists)
+  --%test(Ivan can read the confidential Project A document because he is assigned to the matching confidential leaf)
   procedure ivan_reads_confidential_project_a_document;
 
   --%test(Alice can read a document whose only target restriction is an inactive node)

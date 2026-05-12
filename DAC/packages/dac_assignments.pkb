@@ -56,6 +56,28 @@ as
 
 
   /**
+    Procedure: validate_leaf_node
+      Checks that a dimension node is a leaf node.
+   */
+  procedure validate_leaf_node(
+    p_ddn_id in dac_dimension_nodes_v.ddn_id%type)
+  as
+    l_is_leaf dac_dimension_nodes_v.ddn_is_leaf%type;
+  begin
+    select ddn_is_leaf
+      into l_is_leaf
+      from dac_dimension_nodes_v
+     where ddn_id = p_ddn_id;
+
+    if l_is_leaf <> pit_util.C_TRUE then
+      pit.raise_error(
+        p_message_name => msg.DAC_DIMENSION_NODE_NOT_LEAF,
+        p_msg_args => msg_args(p_ddn_id));
+    end if;
+  end validate_leaf_node;
+
+
+  /**
     Procedure: assign_entity
       See: <DAC_ASSIGNMENTS.assign_entity>
    */
@@ -137,6 +159,9 @@ as
       p_ddn_id => p_row.dena_ddn_id,
       p_ddi_id => p_ddi_id);
 
+    validate_leaf_node(
+      p_ddn_id => p_row.dena_ddn_id);
+
     delete_assignments(
       p_den_id => p_row.dena_den_id,
       p_ddi_id => p_ddi_id);
@@ -145,6 +170,65 @@ as
 
     pit.leave_mandatory;
   end replace_entity_assignments;
+
+
+  /**
+    Procedure: replace_dimension_assignments
+      See: <DAC_ASSIGNMENTS.replace_dimension_assignments>
+   */
+  procedure replace_dimension_assignments(
+    p_den_id in dac_entity_node_assignments_v.dena_den_id%type,
+    p_ddi_id in dac_dimension_nodes_v.ddn_ddi_id%type,
+    p_ddn_id_list in varchar2)
+  as
+    l_row dac_entity_node_assignments_v%rowtype;
+    l_ddn_id_list varchar2(32767 byte) := trim(both ':' from replace(coalesce(p_ddn_id_list, ''), ' ', ''));
+  begin
+    pit.enter_mandatory('replace_dimension_assignments',
+      p_params => msg_params(
+                    msg_param('p_den_id', p_den_id),
+                    msg_param('p_ddi_id', p_ddi_id),
+                    msg_param('p_ddn_id_list', p_ddn_id_list)));
+
+    if l_ddn_id_list is not null then
+      for rec in (
+        select distinct regexp_substr(l_ddn_id_list, '[^:]+', 1, level) ddn_id
+          from dual
+       connect by regexp_substr(l_ddn_id_list, '[^:]+', 1, level) is not null
+      )
+      loop
+        validate_node_dimension(
+          p_ddn_id => rec.ddn_id,
+          p_ddi_id => p_ddi_id);
+
+        validate_leaf_node(
+          p_ddn_id => rec.ddn_id);
+      end loop;
+    end if;
+
+    delete_assignments(
+      p_den_id => p_den_id,
+      p_ddi_id => p_ddi_id);
+
+    if l_ddn_id_list is not null then
+      for rec in (
+        select distinct regexp_substr(l_ddn_id_list, '[^:]+', 1, level) ddn_id
+          from dual
+       connect by regexp_substr(l_ddn_id_list, '[^:]+', 1, level) is not null
+      )
+      loop
+        l_row.dena_den_id := p_den_id;
+        l_row.dena_ddn_id := rec.ddn_id;
+        l_row.dena_valid_from := date '1900-01-01';
+        l_row.dena_valid_to := date '9999-12-31';
+        l_row.dena_active := pit_util.C_TRUE;
+
+        dac_admin.merge_entity_node_assignment(l_row);
+      end loop;
+    end if;
+
+    pit.leave_mandatory;
+  end replace_dimension_assignments;
 
 
   /**

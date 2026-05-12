@@ -6,6 +6,15 @@ select dn.ddn_id,
        pti_parent.pti_name ddn_ddn_name,
        pti_node.pti_name ddn_name,
        pti_node.pti_description ddn_description,
+       case
+         when exists (
+                select 1
+                  from dac_dimension_nodes child
+                 where child.ddn_ddi_id = dn.ddn_ddi_id
+                   and child.ddn_ddn_id = dn.ddn_id
+              ) then 'N'
+         else 'Y'
+       end ddn_is_leaf,
        dn.ddn_active,
        dn.ddn_display_sequence,
        dn.ddn_created_at,
@@ -31,6 +40,7 @@ comment on column dac_dimension_nodes_v.ddn_ddn_id is 'Foreign key to the parent
 comment on column dac_dimension_nodes_v.ddn_ddn_name is 'Translated display name of the parent dimension node.';
 comment on column dac_dimension_nodes_v.ddn_name is 'Translated display name of the dimension node.';
 comment on column dac_dimension_nodes_v.ddn_description is 'Translated description of the dimension node.';
+comment on column dac_dimension_nodes_v.ddn_is_leaf is 'Flag indicating whether the dimension node has no child nodes.';
 comment on column dac_dimension_nodes_v.ddn_active is 'Flag indicating whether the node is active.';
 comment on column dac_dimension_nodes_v.ddn_display_sequence is 'Display order of the node.';
 comment on column dac_dimension_nodes_v.ddn_created_at is 'Creation timestamp.';

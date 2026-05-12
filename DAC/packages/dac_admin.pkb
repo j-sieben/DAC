@@ -529,6 +529,8 @@ as
   procedure validate_entity_node_assignment(
     p_row in dac_entity_node_assignments_v%rowtype)
   as
+    l_is_leaf dac_dimension_nodes_v.ddn_is_leaf%type;
+    l_is_restrictive dac_dimensions_v.ddi_is_restrictive%type;
   begin
     pit.enter_mandatory('validate_entity_node_assignment');
 
@@ -536,6 +538,26 @@ as
       pit.raise_error(
         p_message_name => msg.DAC_INVALID_VALIDITY_BAND,
         p_msg_args => msg_args('DAC_ENTITY_NODE_ASSIGNMENTS'));
+    end if;
+
+    select ddn_is_leaf,
+           ddn_ddi_is_restrictive
+      into l_is_leaf,
+           l_is_restrictive
+      from (
+        select dn.ddn_is_leaf,
+               d.ddi_is_restrictive ddn_ddi_is_restrictive
+          from dac_dimension_nodes_v dn
+          join dac_dimensions_v d
+            on dn.ddn_ddi_id = d.ddi_id
+         where dn.ddn_id = p_row.dena_ddn_id
+      );
+
+    if l_is_restrictive = pit_util.C_TRUE
+       and l_is_leaf <> pit_util.C_TRUE then
+      pit.raise_error(
+        p_message_name => msg.DAC_DIMENSION_NODE_NOT_LEAF,
+        p_msg_args => msg_args(p_row.dena_ddn_id));
     end if;
 
     pit.leave_mandatory;

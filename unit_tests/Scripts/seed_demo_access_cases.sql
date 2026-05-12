@@ -9,6 +9,14 @@ begin
     p_det_display_sequence => 50);
 
   dac_admin.merge_dimension_node(
+    p_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL',
+    p_ddn_ddi_id => 'DISTRIBUTION_LIST',
+    p_ddn_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
+    p_ddn_name => 'Projekt A allgemein',
+    p_ddn_description => q'[Unterverteiler für allgemeine Dokumente und Informationen zum Projekt A.]',
+    p_ddn_display_sequence => 10);
+
+  dac_admin.merge_dimension_node(
     p_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL',
     p_ddn_ddi_id => 'DISTRIBUTION_LIST',
     p_ddn_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
@@ -206,7 +214,11 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_ALICE',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_ALICE',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_BOB',
@@ -222,17 +234,28 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_CAROL',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_DAVE',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL',
+    p_dena_valid_from => date '2020-01-01',
+    p_dena_valid_to => date '2020-12-31');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_DAVE',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL',
     p_dena_valid_from => date '2020-01-01',
     p_dena_valid_to => date '2020-12-31');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_ERIN',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL',
+    p_dena_active => pit_util.C_FALSE);
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_ERIN',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL',
     p_dena_active => pit_util.C_FALSE);
 
   dac_admin.merge_entity_node_assignment(
@@ -241,7 +264,11 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_FRANK',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_FRANK',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_FRANK',
@@ -249,7 +276,13 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_GRACE',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL',
+    p_dena_valid_from => date '2099-01-01',
+    p_dena_valid_to => date '2099-12-31');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_GRACE',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL',
     p_dena_valid_from => date '2099-01-01',
     p_dena_valid_to => date '2099-12-31');
 
@@ -259,15 +292,23 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_HEIDI',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_HEIDI',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'USER_IVAN',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
+
+  dac_admin.merge_entity_node_assignment(
+    p_dena_den_id => 'USER_IVAN',
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_CONFIDENTIAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'DOC_PROJECT_A_PLAN',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'DOC_PROJECT_A_SECRET',
@@ -279,11 +320,11 @@ begin
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'DOC_INACTIVE_ARCHIVE',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'DOC_PROJECT_A_INTERNAL',
-    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A');
+    p_dena_ddn_id => 'DISTRIBUTION_LIST_PROJECT_A_GENERAL');
 
   dac_admin.merge_entity_node_assignment(
     p_dena_den_id => 'DOC_PROJECT_A_INTERNAL',

@@ -62,6 +62,14 @@ begin
     p_pms_pml_name => 'GERMAN');
 
   pit_admin.merge_message(
+    p_pms_name => 'DAC_DIMENSION_NODE_NOT_LEAF',
+    p_pms_text => q'[Der Dimensionsknoten "#1#" ist kein Blattknoten und darf hier nicht verwendet werden.]',
+    p_pms_description => q'[Eine Berechtigungszuordnung verweist auf einen Dimensionsknoten, der noch untergeordnete Knoten besitzt.]',
+    p_pms_pse_id => pit.LEVEL_ERROR,
+    p_pms_pmg_name => 'DAC',
+    p_pms_pml_name => 'GERMAN');
+
+  pit_admin.merge_message(
     p_pms_name => 'DAC_INVALID_VALIDITY_BAND',
     p_pms_text => q'[Das Gültigkeitsband "#1#" ist ungültig. Der Beginn darf nicht nach dem Ende liegen.]',
     p_pms_description => q'[Ein Gültigkeitsband wurde mit vertauschten Grenzen übergeben.]',

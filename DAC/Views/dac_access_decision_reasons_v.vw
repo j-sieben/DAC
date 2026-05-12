@@ -58,28 +58,9 @@ with
         on dena_ddn_ddi_id = ddi_id
      where dena_active = 'Y'
        and ddn_active = 'Y'
+       and ddn_is_leaf = 'Y'
        and ddi_active = 'Y'
        and trunc(sysdate) between dena_valid_from and dena_valid_to
-  ),
-  node_closure as (
-    select ddn_ddi_id,
-           connect_by_root ddn_id ancestor_ddn_id,
-           ddn_id descendant_ddn_id
-      from dac_dimension_nodes_v
-     where ddn_active = 'Y'
-   connect by nocycle prior ddn_id = ddn_ddn_id
-          and prior ddn_ddi_id = ddn_ddi_id
-  ),
-  related_nodes as (
-    select ddn_ddi_id,
-           ancestor_ddn_id left_ddn_id,
-           descendant_ddn_id right_ddn_id
-      from node_closure
-    union
-    select ddn_ddi_id,
-           descendant_ddn_id left_ddn_id,
-           ancestor_ddn_id right_ddn_id
-      from node_closure
   ),
   target_scope as (
     select dena_den_id,
@@ -104,10 +85,7 @@ with
       join active_assignments target_assignments
         on access_pairs.target_den_id = target_assignments.dena_den_id
        and subject_assignments.dena_ddn_ddi_id = target_assignments.dena_ddn_ddi_id
-      join related_nodes
-        on subject_assignments.dena_ddn_ddi_id = related_nodes.ddn_ddi_id
-       and subject_assignments.dena_ddn_id = related_nodes.left_ddn_id
-       and target_assignments.dena_ddn_id = related_nodes.right_ddn_id
+       and subject_assignments.dena_ddn_id = target_assignments.dena_ddn_id
      group by access_pairs.subject_den_id,
               access_pairs.target_den_id,
               target_assignments.dena_ddn_ddi_id
@@ -133,7 +111,7 @@ select access_pairs.subject_den_id dadr_subject_den_id,
        end dadr_dms_id,
        case
          when target_scope.target_include_count is null then 'Ziel ist in dieser restriktiven Dimension nicht verortet.'
-         when include_matches.match_count > 0 then 'Subjekt und Ziel liegen in derselben Hierarchie dieser restriktiven Dimension.'
+         when include_matches.match_count > 0 then 'Subjekt und Ziel liegen auf demselben Blattknoten dieser restriktiven Dimension.'
          else 'Das Ziel ist in dieser restriktiven Dimension verortet, das Subjekt aber nicht passend.'
        end dadr_reason,
        active_dimensions.ddi_display_sequence dadr_display_sequence
