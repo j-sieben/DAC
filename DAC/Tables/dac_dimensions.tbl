@@ -18,7 +18,7 @@
  */
 create table dac_dimensions (
   ddi_id varchar2(128 byte) constraint ddi_id_chk check(ddi_id = upper(ddi_id) and regexp_instr(ddi_id, '^[A-Z][A-Z0-9_]+$') = 1),
-  ddi_pti_id generated always as ('DDI_' || ddi_id) virtual,
+  ddi_pti_id varchar2(132 byte) generated always as ('DDI_' || ddi_id) virtual,
   ddi_pgr_id varchar2(128 byte) default on null 'DAC' constraint ddi_pgr_id_chk check(ddi_pgr_id = 'DAC'),
   ddi_is_restrictive char(1 byte) default on null 'N'
     constraint ddi_is_restrictive_chk check (ddi_is_restrictive in ('Y', 'N')),

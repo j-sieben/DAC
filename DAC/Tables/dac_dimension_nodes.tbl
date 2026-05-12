@@ -20,7 +20,7 @@
  */
 create table dac_dimension_nodes (
   ddn_id varchar2(128 byte) constraint ddn_id_chk check(ddn_id = upper(ddn_id) and regexp_instr(ddn_id, '^[A-Z][A-Z0-9_]+$') = 1),
-  ddn_pti_id generated always as ('DDN_' || ddn_id) virtual,
+  ddn_pti_id varchar2(132 byte) generated always as ('DDN_' || ddn_id) virtual,
   ddn_pgr_id varchar2(128 byte) default on null 'DAC' constraint ddn_pgr_id_chk check(ddn_pgr_id = 'DAC'),
   ddn_ddi_id varchar2(128 byte) constraint ddn_ddi_id_nn not null,
   ddn_ddn_id varchar2(128 byte),

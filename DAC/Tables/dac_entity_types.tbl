@@ -17,7 +17,7 @@
  */
 create table dac_entity_types (
   det_id varchar2(128 byte) constraint det_id_chk check(det_id = upper(det_id) and regexp_instr(det_id, '^[A-Z][A-Z0-9_]+$') = 1),
-  det_pti_id generated always as ('DET_' || det_id) virtual,
+  det_pti_id varchar2(132 byte) generated always as ('DET_' || det_id) virtual,
   det_pgr_id varchar2(128 byte) default on null 'DAC' constraint det_pgr_id_chk check(det_pgr_id = 'DAC'),
   det_is_subject char(1 byte) default on null 'N'
     constraint det_is_subject_chk check (det_is_subject in ('Y', 'N')),

@@ -14,7 +14,7 @@
  */
 create table dac_match_states (
   dms_id varchar2(128 byte) constraint dms_id_chk check(dms_id = upper(dms_id) and regexp_instr(dms_id, '^[A-Z][A-Z0-9_]+$') = 1),
-  dms_pti_id generated always as ('DMS_' || dms_id) virtual,
+  dms_pti_id varchar2(132 byte) generated always as ('DMS_' || dms_id) virtual,
   dms_pgr_id varchar2(128 byte) default on null 'DAC' constraint dms_pgr_id_chk check(dms_pgr_id = 'DAC'),
   dms_display_sequence number(10,0) default 10 constraint dms_display_sequence_nn not null,
   dms_active char(1 byte) default on null 'Y'
